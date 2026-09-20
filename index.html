@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>A Little Something For You ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(135deg, #ffd6e0, #f8a5c2, #fbc2eb);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: #5a1830;
+}
+
+.container {
+    width: 90%;
+    max-width: 550px;
+    text-align: center;
+    background: rgba(255,255,255,0.85);
+    padding: 35px;
+    border-radius: 30px;
+    box-shadow: 0 20px 60px rgba(120, 30, 70, 0.25);
+    position: relative;
+    z-index: 2;
+}
+
+section {
+    animation: fadeIn 0.6s ease;
+}
+
+.hidden {
+    display: none;
+}
+
+.big {
+    font-size: 65px;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-size: 40px;
+}
+
+h2 {
+    font-size: 28px;
+    margin: 10px 0;
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+button {
+    border: none;
+    border-radius: 30px;
+    padding: 13px 25px;
+    margin: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    background: white;
+    color: #8e2146;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+    transition: 0.25s;
+}
+
+button:hover {
+    transform: scale(1.08);
+}
+
+.primary {
+    background: #d6336c;
+    color: white;
+}
+
+.heart-main {
+    font-size: 90px;
+    cursor: pointer;
+    animation: heartbeat 1.2s infinite;
+}
+
+@keyframes heartbeat {
+    0%,100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.18);
+    }
+}
+
+/* SADNESS SLIDER */
+
+input[type="range"] {
+    width: 90%;
+    accent-color: #d6336c;
+}
+
+/* MYSTERY BOXES */
+
+.box {
+    font-size: 40px;
+    width: 90px;
+    height: 90px;
+    padding: 0;
+}
+
+/* HEART GAME */
+
+.game {
+    height: 240px;
+    background: rgba(255,255,255,0.6);
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    margin: 20px 0;
+    border: 2px dashed #e78aa5;
+}
+
+.target {
+    position: absolute;
+    font-size: 40px;
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* FLOATING HEARTS */
+
+.floating-heart {
+    position: fixed;
+    bottom: -50px;
+    font-size: 25px;
+    pointer-events: none;
+    animation: floatUp 3s linear forwards;
+    z-index: 10;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.small {
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+@media(max-width:500px) {
+
+    .container {
+        padding: 25px 18px;
+    }
+
+    h2 {
+        font-size: 23px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    .big {
+        font-size: 55px;
+    }
+}
+</style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <!-- SCREEN 1 -->
+
+    <section id="screen1">
+
+        <div class="big">💌</div>
+
+        <h2>
+            Hey, my favorite person...
+        </h2>
+
+        <p>
+            I heard someone I love isn't having the best day.
+        </p>
+
+        <p>
+            So I made you a tiny game.
+            <br>
+            No pressure. Just smiles. 🥹
+        </p>
+
+        <button class="primary" onclick="startGame()">
+            Okay, entertain me 😌
+        </button>
+
+    </section>
+
+
+    <!-- SCREEN 2 -->
+
+    <section id="screen2" class="hidden">
+
+        <div class="big">🥺</div>
+
+        <h2>
+            First question...
+        </h2>
+
+        <p>
+            How sad are you right now?
+        </p>
+
+        <input
+            type="range"
+            id="sadness"
+            min="0"
+            max="10"
+            value="7"
+            oninput="updateSadness()"
+        >
+
+        <p id="sadText">
+            Hmm... we need emergency cuddles. 🫂
+        </p>
+
+        <button class="primary" onclick="nextScreen(3)">
+            Continue ❤️
+        </button>
+
+    </section>
+
+
+    <!-- SCREEN 3 -->
+
+    <section id="screen3" class="hidden">
+
+        <div class="big">🎁</div>
+
+        <h2>
+            Pick one mystery box
+        </h2>
+
+        <p>
+            There is definitely no wrong choice.
+            <br>
+            Probably. 👀
+        </p>
+
+        <div>
+
+            <button class="box"
+                onclick="openBox('You are officially entitled to one giant hug. 🫂❤️')">
+                🎁
+            </button>
+
+            <button class="box"
+                onclick="openBox('Breaking news: someone thinks you are ridiculously cute. 🥰')">
+                🎀
+            </button>
+
+            <button class="box"
+                onclick="openBox('Prescription: 3 kisses, unlimited cuddles, and absolutely no sadness. 💕')">
+                💝
+            </button>
+
+        </div>
+
+        <p id="boxMessage"></p>
+
+        <button
+            id="nextButton"
+            class="primary hidden"
+            onclick="nextScreen(4)">
+            One more thing 👀
+        </button>
+
+    </section>
+
+
+    <!-- SCREEN 4 -->
+
+    <section id="screen4" class="hidden">
+
+        <div class="big">❤️</div>
+
+        <h2>
+            Catch my heart!
+        </h2>
+
+        <p>
+            Catch it 5 times.
+            <br>
+            If you can. 😈
+        </p>
+
+        <div class="game" id="heartGame">
+
+            <button
+                class="target"
+                id="heartTarget"
+                onclick="catchHeart()">
+                ❤️
+            </button>
+
+        </div>
+
+        <p id="score">
+            Caught: 0 / 5
+        </p>
+
+    </section>
+
+
+    <!-- SCREEN 5 -->
+
+    <section id="screen5" class="hidden">
+
+        <div class="big">🥰</div>
+
+        <h2>
+            Okay, you win.
+        </h2>
+
+        <p>
+            You caught my heart five times...
+        </p>
+
+        <p>
+            But unfortunately...
+        </p>
+
+        <h2>
+            You already had it. ❤️
+        </h2>
+
+        <p>
+            Whatever made today difficult doesn't have to be
+            solved tonight.
+        </p>
+
+        <p>
+            Just breathe, relax,
+            and remember that you are loved.
+        </p>
+
+        <h2>
+            Now give me that smile. 😌💕
+        </h2>
+
+        <button class="primary" onclick="celebrate()">
+            ✨ Make it rain love ✨
+        </button>
+
+    </section>
+
+</div>
+
+
+<script>
+
+let currentScreen = 1;
+let score = 0;
+
+
+/* SCREEN CONTROL */
+
+function nextScreen(number) {
+
+    document
+        .getElementById("screen" + currentScreen)
+        .classList.add("hidden");
+
+    document
+        .getElementById("screen" + number)
+        .classList.remove("hidden");
+
+    currentScreen = number;
+
+}
+
+
+/* START */
+
+function startGame() {
+
+    nextScreen(2);
+
+}
+
+
+/* SADNESS */
+
+function updateSadness() {
+
+    const value =
+        document.getElementById("sadness").value;
+
+    const text =
+        document.getElementById("sadText");
+
+
+    if (value <= 2) {
+
+        text.innerHTML =
+            "Look at you! You're doing okay. 😌❤️";
+
+    }
+
+    else if (value <= 5) {
+
+        text.innerHTML =
+            "A little hug might fix this. 🫂";
+
+    }
+
+    else if (value <= 8) {
+
+        text.innerHTML =
+            "Hmm... we need emergency cuddles. 🫂";
+
+    }
+
+    else {
+
+        text.innerHTML =
+            "🚨 EMERGENCY: Chocolate + cuddles required immediately! 🍫🫂";
+
+    }
+
+}
+
+
+/* MYSTERY BOX */
+
+function openBox(message) {
+
+    document
+        .getElementById("boxMessage")
+        .innerHTML = message;
+
+    document
+        .getElementById("nextButton")
+        .classList.remove("hidden");
+
+    createHearts(12);
+
+}
+
+
+/* HEART GAME */
+
+const heart =
+    document.getElementById("heartTarget");
+
+const game =
+    document.getElementById("heartGame");
+
+
+function moveHeart() {
+
+    const maxX =
+        game.clientWidth - 60;
+
+    const maxY =
+        game.clientHeight - 60;
+
+
+    const x =
+        Math.random() * maxX;
+
+    const y =
+        Math.random() * maxY;
+
+
+    heart.style.left = x + "px";
+    heart.style.top = y + "px";
+
+}
+
+
+function catchHeart() {
+
+    score++;
+
+    document.getElementById("score").innerHTML =
+        "Caught: " + score + " / 5";
+
+
+    createHearts(5);
+
+
+    if (score >= 5) {
+
+        setTimeout(() => {
+
+            nextScreen(5);
+
+        }, 500);
+
+    }
+
+    else {
+
+        moveHeart();
+
+    }
+
+}
+
+
+moveHeart();
+
+
+/* FLOATING HEARTS */
+
+function createHearts(amount) {
+
+    for (let i = 0; i < amount; i++) {
+
+        const heart =
+            document.createElement("div");
+
+        heart.className =
+            "floating-heart";
+
+        const hearts = [
+            "❤️",
+            "💕",
+            "💖",
+            "💗",
+            "💓",
+            "💞"
+        ];
+
+        heart.innerHTML =
+            hearts[
+                Math.floor(
+                    Math.random() * hearts.length
+                )
+            ];
+
+
+        heart.style.left =
+            Math.random() * 100 + "vw";
+
+
+        heart.style.animationDuration =
+            (2 + Math.random() * 3) + "s";
+
+
+        document.body.appendChild(heart);
+
+
+        setTimeout(() => {
+
+            heart.remove();
+
+        }, 5000);
+
+    }
+
+}
+
+
+/* FINAL CELEBRATION */
+
+function celebrate() {
+
+    createHearts(60);
+
+
+    document.querySelector("#screen5 h2").innerHTML =
+        "Mission accomplished. 🥹❤️";
+
+
+    document.querySelector("#screen5 p").innerHTML =
+        "Your smile is officially my favorite achievement. 💕";
+
+
+    setTimeout(() => {
+
+        alert(
+            "Now come here. 🫂❤️\n\n" +
+            "Your husband demands one hug."
+        );
+
+    }, 1200);
+
+}
+
+</script>
+
+</body>
+</html>
